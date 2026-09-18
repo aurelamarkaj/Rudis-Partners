@@ -112,3 +112,7 @@ The original contact page contains a real main form (the missing-form error belo
 ## Sector image clarity — 2026-09-18
 
 Replaced 485–550px square thumbnails with original source photos, 1024–2560px wide, exported locally as quality-95 WebP without upscaling. Updated both locale homepage carousels, sector overview and all sector detail pages. Hydrocarbons uses the source site's higher-resolution refinery photo. The food-consumer source photograph has intentional background blur; its original cart detail is preserved. Source URLs are recorded in `docs/sector-image-sources.json`. Browser confirmed the consumer detail loads the new 1200px asset with no page overflow.
+
+## Search on sector pages — 2026-09-18
+
+Reproduced the OJF navigation flow. Search worked after development compilation/hydration, with no application console errors in the test tab. Switched the local preview at 127.0.0.1:3001 to the existing verified production build (`npm run start -- --port 3001`) to remove development compilation delays. Verified immediate search opening, accent-insensitive `turizem` matching, navigation OJF → Tourism, and a second search back to OJF. Future code edits require a new build and preview restart; use the dev command when actively editing.
