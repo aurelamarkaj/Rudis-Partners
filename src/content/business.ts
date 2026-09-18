@@ -1,5 +1,5 @@
 import type { Locale } from './types';
-export type BusinessService = { slug: Record<Locale,string>; title: Record<Locale,string>; paragraphs: Record<Locale,string[]> };
+export type BusinessService = { slug: Record<Locale,string>; title: Record<Locale,string>; paragraphs: Record<Locale,string[]>; bullets?: Record<Locale,string[]>; source?: string };
 export const businessServices: BusinessService[] = [
   {
     "slug": {

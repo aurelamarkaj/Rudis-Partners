@@ -82,3 +82,28 @@ Burimet e lexuara: `/organizim-strukturim-biznesi-2/`, `/menaxhimi-i-burimeve-nj
 Tri të parat kanë tekst përshkrues. Financë/risk, taksa dhe audit/kontabilitet kanë vetëm një titull të vjetër të gabuar në përmbajtjen e burimit. Teknologjia shfaqet si lidhje `#` në menunë burim, pa faqe të identifikueshme. Këto katër faqe lokale shfaqin titullin e saktë, kontaktin dhe “Përshkrimi i shërbimit së shpejti.” Deri në marrjen e përmbajtjes së miratuar, nuk shtohen përshkrime shërbimesh të hamendësuara.
 
 Lista Biznes & Financë tani ka shtatë lidhje, duke ndarë taksat nga audit/kontabiliteti dhe duke përfshirë menaxhimin e krizave. Totali i listave në faqen Shërbimet tona është 25 zëra.
+
+## Marrëdhënie Publike & Marketing dhe Konsulencë Ligjore
+
+- `src/content/marketing.ts`: 12 faqe me përmbajtjen e plotë nga lidhjet e përdoruesit dhe përkthim anglisht. URL-të shqip nuk përfundojnë me `-2`. Titujt e gabuar të hero-ve në burim janë zëvendësuar me emrin e saktë të shërbimit.
+- `src/content/legal.ts`: 12 faqe të bazuara në PDF-të e dhëna, me 56 zëra në secilën gjuhë. Titujt pasqyrojnë emrat e dokumenteve; janë bërë vetëm korrigjime drejtshkrimore pa zgjeruar fushën e shërbimeve.
+- Burimet PDF: Administrative.pdf, E-drejta-e-punes.pdf, Deme-pasurore-dhe-Morale.pdf, Falimenti.pdf, Dogana.pdf, Familjare.pdf, Kontrata.pdf, Penale.pdf, Pronesia-Industriale-dhe-Intelektuale.pdf, Pronesia.pdf, Tatime-dhe-taksa.pdf dhe Tregtare.pdf, nga dosja Downloads e përdoruesit. Dokumentet origjinale nuk janë ndryshuar.
+- `src/content/service-pages.ts` bashkon 31 shërbime (7 biznes, 12 marketing, 12 ligjore). Secili ka faqe shqip dhe anglisht me `InnerHero`, menunë e kategorisë dhe lidhje kontakti.
+- Menuja me dy nivele, sidebar-i, lista e shërbimeve dhe kërkimi përdorin të njëjtat të dhëna. Kërkimi përfshin edhe listat ligjore. Në faqen e shërbimeve, të 31 zërat janë lidhje funksionale.
+- Kur shtohen rrugë të reja statike, mund të nevojitet rinisja e serverit të zhvillimit për të rifreskuar `generateStaticParams`.
+
+## Sectors / Who we work with
+
+- Overview: `/kush-punon-me-ne` and `/en/who-we-work-with`.
+- Ten sector detail pages: `/portfolio-item/<sq-slug>` and `/en/sectors/<en-slug>`.
+- Content, translated titles, route pairs and local photos: `src/content/sector-pages.ts`.
+- Shared overview/detail rendering: `src/components/SectorPages.tsx`; all use `InnerHero` and the approved office photo.
+- Header, footer, homepage carousel, search and language switch link to the new pages.
+- Source: https://rudispartners.al/kush-punon-me-ne/ and its ten sector links. The source `/en` pages still contain Albanian text; the local English copy is a faithful translation of that text. WordPress error output and unrelated template tags are excluded.
+- Development uses the supported `--webpack` option because Turbopack development hydration failed in the local browser. Start with `npm run dev -- --port 3001`. Production build remains unchanged.
+
+## Contact and insights
+
+`/kontakt` / `/en/contact` show the official address, phone, email, Facebook and availability. No form submissions or backend are added. `/njohuri` / `/en/insights` show a bilingual coming-soon page. Both are linked from header/footer and retain the shared inner-page hero. Contact information was checked against `https://rudispartners.al/contact-us/` and its English version on 2026-09-18.
+
+Contact now includes the original four fields in both languages. The local form opens a prefilled email draft; direct server delivery is not configured.

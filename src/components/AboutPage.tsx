@@ -15,7 +15,7 @@ export function AboutPage({ content: c }: { content: Content }) {
       <InnerHero content={c} title={a.title} eyebrow={a.greeting} heading={<>{a.introduction}<br /><span>Rudis &amp; Partners</span></>} description={a.principles} />
       <section className="about-story" id="rreth-nesh" aria-labelledby="story-title" tabIndex={-1}>
         <div className="about-story-heading"><p className="eyebrow line-before">{a.title}</p><h2 id="story-title">{a.principles}</h2><span className="about-monogram" aria-hidden="true">R&amp;P</span></div>
-        <div className="about-story-copy"><h3>{a.lead}</h3><p>{a.description}</p><p>{a.sectors}</p><a className="text-link" href={`${home}#sektoret`}>{c.nav.sectors}<Icon name="arrow" /></a></div>
+        <div className="about-story-copy"><h3>{a.lead}</h3><p>{a.description}</p><p>{a.sectors}</p><a className="text-link" href={routes[c.locale].sectors}>{c.nav.sectors}<Icon name="arrow" /></a></div>
       </section>
       <section className="about-expertise" aria-labelledby="about-services-title">
         <div className="about-expertise-inner"><div><p className="eyebrow line-before">{c.nav.services}</p><h2 id="about-services-title">{a.servicesTitle}</h2></div>

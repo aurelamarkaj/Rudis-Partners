@@ -74,3 +74,41 @@ Testimi u krye në shfletuesin e aplikacionit me përmasa të simuluara, jo në 
 - Ndërrimi i gjuhës ruan shërbimin. Kërkimi gjen nënfaqet dhe lidhjet e kategorive çojnë te faqja përkatëse e Shërbimeve.
 - Build-i përfundoi me sukses, përfshirë kontrollin TypeScript. Konsola nuk raportoi gabime gjatë kontrollit.
 - Katër përshkrimet që mungojnë në burim mbeten të shënuara për plotësim; faqet dhe kontaktet janë funksionale.
+
+## Marketing dhe faqet ligjore
+
+- Marketing: 12 faqe / 24 versione gjuhësore; të gjitha URL-të u testuan me HTTP 200. Build-i përfshin përmbajtjen e plotë dhe hero-n e përbashkët.
+- U lexuan dhe u inspektuan vizualisht të 12 PDF-të ligjore (një faqe secili). U ruajtën 56 zëra, duke bashkuar rreshtat e thyer në PDF dhe korrigjuar drejtshkrimin.
+- Ligjore: 12 faqe / 24 versione gjuhësore, secila me numër të njëjtë zërash në shqip dhe anglisht; të gjitha URL-të përgjigjen HTTP 200.
+- Build-i përfundon me sukses, përfshirë TypeScript; 62 faqe shërbimesh në total, plus homepage, Kush jemi dhe Shërbimet tona në të dyja gjuhët.
+- Menuja shfaq 12 zëra për Marketing dhe 12 për Ligjore. U testua klikimi te zëri i fundit, kalimi i gjuhës dhe nënmenuja mobile.
+- Kërkimi “adoption” hap Family Law; kërkimi “narrative” gjen Communication Narrative Strategy.
+- Kontrolluar në 1440px, 768px dhe 320px, përfshirë titujt e gjatë. Nuk u evidentua tejkalim horizontal apo gabime në konsolën e skedës së kontrollit.
+- Një cache e vjetër e rrugëve në serverin e zhvillimit u zgjidh me rinisje; URL-të e reja anglisht u ritestuan me sukses.
+
+## Sector pages — 2026-09-17
+
+- Added both sector overviews and ten bilingual sector details (22 routes).
+- Production build and TypeScript passed; 92 static pages generated overall.
+- All 22 new routes returned HTTP 200 with the approved office hero image.
+- Desktop arrow center matches the services label center (51.5px); SVG replaces the baseline-dependent text glyph.
+- Verified overview card navigation and same-sector language switching.
+- Verified English search finds sector content and navigates to its detail page, in both production and Webpack development.
+- 320px detail viewport: no horizontal overflow or broken loaded images.
+- Turbopack development did not hydrate interactive controls in the local browser; refreshed cache did not solve it. Supported Webpack development mode restores the controls; npm dev now uses it.
+
+## Contact, insights and sector alignment — 2026-09-18
+
+- Sector cards stretch their heading areas within each grid row. At 1440px, the first three separators all measured y=1358.875px.
+- Added contact and coming-soon insights pages in SQ/EN, with same-page locale switching and header/footer links.
+- Contact data taken from the official contact page; template filler and missing-form errors omitted. Phone/email links remain direct native links.
+- Inner-page hero contact buttons now lead to the contact page; on the contact page the button jumps to its contact details.
+- English contact at 375px: correct document language and no horizontal overflow.
+
+## Contact form — 2026-09-18
+
+The original contact page contains a real main form (the missing-form error belongs to its separate newsletter widget). Added matching name, email, subject (required) and message (optional) fields in SQ/EN. Browser validation is enabled. Local submission prepares a mailto draft; no message is sent automatically and there is no server delivery integration. Checked desktop layout and required-field validation.
+
+## Sector image clarity — 2026-09-18
+
+Replaced 485–550px square thumbnails with original source photos, 1024–2560px wide, exported locally as quality-95 WebP without upscaling. Updated both locale homepage carousels, sector overview and all sector detail pages. Hydrocarbons uses the source site's higher-resolution refinery photo. The food-consumer source photograph has intentional background blur; its original cart detail is preserved. Source URLs are recorded in `docs/sector-image-sources.json`. Browser confirmed the consumer detail loads the new 1200px asset with no page overflow.

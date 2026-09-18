@@ -7,6 +7,7 @@ import { about } from '@/content/about';
 import { routes, type PageName } from '@/content/routes';
 import { servicesContent } from '@/content/services';
 import { businessServices, businessHref } from '@/content/business';
+import { sectorPages, sectorHref } from '@/content/sector-pages';
 import { ServicesMenu } from './ServicesMenu';
 import { servicePages, categoryTitle } from '@/content/service-pages';
 
@@ -14,27 +15,28 @@ function normalize(text: string) {
   return text.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLocaleLowerCase().trim();
 }
 
-export function Header({ content: c, page = 'home', businessSlug }: { content: Content; page?: PageName; businessSlug?: string }) {
+export function Header({ content: c, page = 'home', businessSlug, sectorSlug }: { content: Content; page?: PageName; businessSlug?: string; sectorSlug?: string }) {
+  const currentSector = sectorPages.find(s=>s.slug.sq===sectorSlug);
   const currentBusiness = servicePages.find(s => s.slug.sq === businessSlug);
   const home = c.locale === 'sq' ? '/' : '/en';
   const homePrefix = page === 'home' ? '' : home;
   const aboutPath = c.locale === 'sq' ? '/kush-jemi' : '/en/about';
   const servicesPath = routes[c.locale].services;
-  const resultHref = (id: string) => id.startsWith('business:') ? businessHref(servicePages.find(s => s.slug.sq === id.slice(9))!, c.locale) : id.startsWith('group-') ? `${page === 'services' && !currentBusiness ? '' : servicesPath}#${id}` : id === 'rreth-nesh' ? `${page === 'about' ? '' : aboutPath}#${id}` : `${id === 'kontakt' ? '' : homePrefix}#${id}`;
+  const resultHref = (id: string) => id.startsWith('sector-') ? sectorHref(sectorPages.find(s=>s.id===id.slice(7))!,c.locale) : id.startsWith('business:') ? businessHref(servicePages.find(s => s.slug.sq === id.slice(9))!, c.locale) : id.startsWith('group-') ? `${page === 'services' && !currentBusiness ? '' : servicesPath}#${id}` : id === 'rreth-nesh' ? `${page === 'about' ? '' : aboutPath}#${id}` : `${id === 'kontakt' ? '' : homePrefix}#${id}`;
   const [menuOpen, setMenuOpen] = useState(false);
   const [query, setQuery] = useState('');
   const dialog = useRef<HTMLDialogElement>(null);
   const menuButton = useRef<HTMLButtonElement>(null);
   const searchInput = useRef<HTMLInputElement>(null);
   const entries = useMemo(() => [
-    ...servicePages.map(s => ({ title: s.title[c.locale], text: s.paragraphs[c.locale].join(' '), id: `business:${s.slug.sq}`, category: categoryTitle(s,c.locale) })),
+    ...servicePages.map(s => ({ title: s.title[c.locale], text: [...s.paragraphs[c.locale], ...(s.bullets?.[c.locale] ?? [])].join(' '), id: `business:${s.slug.sq}`, category: categoryTitle(s,c.locale) })),
     ...servicesContent[c.locale].groups.map(g => ({ title: g.title, text: g.items.join(' '), id: `group-${g.id}`, category: c.nav.services })),
     { title: about[c.locale].title, text: `${about[c.locale].principles} ${about[c.locale].lead} ${about[c.locale].description} ${about[c.locale].sectors}`, id: 'rreth-nesh', category: 'Rudis & Partners' },
     { title: `${c.hero.first} ${c.hero.second}`, text: c.hero.description, id: 'home', category: c.nav.home },
     { title: c.intro.title, text: c.intro.description, id: 'ekspertiza', category: c.nav.services },
     ...c.steps.map((s, i) => ({ title: s.title, text: s.description, id: `step-${i + 1}`, category: c.intro.eyebrow })),
     ...c.services.map(s => ({ title: s.title, text: s.description, id: `service-${s.id}`, category: c.nav.services })),
-    ...c.sectors.items.map(s => ({ title: s.title, text: c.sectors.description, id: `sector-${s.id}`, category: c.nav.sectors })),
+    ...sectorPages.map(s => ({ title: s.title[c.locale], text: s.paragraphs[c.locale].join(' '), id: `sector-${s.id}`, category: c.nav.sectors })),
     ...c.benefits.map((b, i) => ({ title: b.title, text: b.description, id: `benefit-${i}`, category: c.nav.contact })),
     { title: c.footer.contact, text: `${c.footer.address} +355 672025509 info@rudispartners.al`, id: 'kontakt', category: 'Rudis & Partners' },
   ], [c]);
@@ -79,14 +81,14 @@ export function Header({ content: c, page = 'home', businessSlug }: { content: C
         <a href={`${homePrefix}#home`} onClick={() => setMenuOpen(false)}>{c.nav.home}</a>
         <a href={aboutPath} aria-current={page === 'about' ? 'page' : undefined} onClick={() => setMenuOpen(false)}>{c.nav.about}</a>
         <ServicesMenu currentSlug={businessSlug} content={c} active={page === 'services'} onNavigate={() => setMenuOpen(false)} />
-        <a href={`${homePrefix}#sektoret`} onClick={() => setMenuOpen(false)}>{c.nav.sectors}</a>
-        <span className="nav-unavailable" aria-disabled="true">{c.nav.insights}<small>{c.ui.soon}</small></span>
-        <a href="#kontakt" onClick={() => setMenuOpen(false)}>{c.nav.contact}</a>
+        <a href={routes[c.locale].sectors} aria-current={page === 'sectors' ? 'page' : undefined} onClick={() => setMenuOpen(false)}>{c.nav.sectors}</a>
+        <a href={routes[c.locale].insights} aria-current={page === 'insights' ? 'page' : undefined} onClick={() => setMenuOpen(false)}>{c.nav.insights}</a>
+        <a href={routes[c.locale].contact} aria-current={page === 'contact' ? 'page' : undefined} onClick={() => setMenuOpen(false)}>{c.nav.contact}</a>
       </nav>
       <div className="header-actions">
         <div className="language-switch" aria-label={c.locale === 'sq' ? 'Gjuha' : 'Language'}>
-          <a href={currentBusiness ? businessHref(currentBusiness, 'sq') : routes.sq[page]} lang="sq" hrefLang="sq" aria-label="Shqip" aria-current={c.locale === 'sq' ? 'page' : undefined}><img src="/images/flag-sq.webp" alt="" width="22" height="15" /><span>SQ</span></a>
-          <a href={currentBusiness ? businessHref(currentBusiness, 'en') : routes.en[page]} lang="en" hrefLang="en" aria-label="English" aria-current={c.locale === 'en' ? 'page' : undefined}><img src="/images/flag-en.webp" alt="" width="24" height="15" /><span>EN</span></a>
+          <a href={currentSector ? sectorHref(currentSector, 'sq') : currentBusiness ? businessHref(currentBusiness, 'sq') : routes.sq[page]} lang="sq" hrefLang="sq" aria-label="Shqip" aria-current={c.locale === 'sq' ? 'page' : undefined}><img src="/images/flag-sq.webp" alt="" width="22" height="15" /><span>SQ</span></a>
+          <a href={currentSector ? sectorHref(currentSector, 'en') : currentBusiness ? businessHref(currentBusiness, 'en') : routes.en[page]} lang="en" hrefLang="en" aria-label="English" aria-current={c.locale === 'en' ? 'page' : undefined}><img src="/images/flag-en.webp" alt="" width="24" height="15" /><span>EN</span></a>
         </div>
         <button className="icon-button search-trigger" onClick={openSearch} aria-label={c.ui.search}><Icon name="search" /></button>
         <button ref={menuButton} className="icon-button menu-toggle" aria-label={menuOpen ? c.ui.close : c.ui.menu} aria-expanded={menuOpen} aria-controls="main-navigation" onClick={() => setMenuOpen(!menuOpen)}><Icon name={menuOpen ? 'close' : 'menu'} /></button>

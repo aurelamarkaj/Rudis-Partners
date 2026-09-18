@@ -14,7 +14,7 @@ export function Footer({ content: c, page = 'home' }: { content: Content; page?:
           <li><Icon name="phone" /><a href="tel:+355672025509">+355 67 20 25509</a></li>
           <li><Icon name="mail" /><a href="mailto:info@rudispartners.al">info@rudispartners.al</a></li>
         </ul><a className="facebook-link" href="https://www.facebook.com/RUDIS-Partners-112214571087488" target="_blank" rel="noopener noreferrer" aria-label={c.locale === 'sq' ? 'Rudis & Partners në Facebook (hapet në dritare të re)' : 'Rudis & Partners on Facebook (opens in a new window)'}><span aria-hidden="true">f</span>Facebook<Icon name="arrow" /></a></section>
-        <section><h2>{c.footer.links}</h2><ul className="footer-links"><li><a href={aboutPath} aria-current={page === 'about' ? 'page' : undefined}>{c.nav.about}</a></li><li><a href={routes[c.locale].services}>{c.nav.services}</a></li><li><a href={`${homePrefix}#sektoret`}>{c.nav.sectors}</a></li></ul></section>
+        <section><h2>{c.footer.links}</h2><ul className="footer-links"><li><a href={aboutPath} aria-current={page === 'about' ? 'page' : undefined}>{c.nav.about}</a></li><li><a href={routes[c.locale].services}>{c.nav.services}</a></li><li><a href={routes[c.locale].sectors}>{c.nav.sectors}</a></li><li><a href={routes[c.locale].insights}>{c.nav.insights}</a></li><li><a href={routes[c.locale].contact}>{c.nav.contact}</a></li></ul></section>
         <section className="footer-hours"><h2>{c.footer.hours}</h2><p>{c.benefits[0].description.replace(c.locale === 'sq' ? ' Ndaj jemi të disponueshëm 24/24!' : ' That is why we are available 24/24!', '')}</p><p className="availability">{c.footer.availability}</p></section>
       </div>
     </div>

@@ -7,13 +7,14 @@ import { InnerHero } from './InnerHero';
 import { Icon } from './Icon';
 import { routes } from '@/content/routes';
 import { marketingServices } from '@/content/marketing';
-import { categoryTitle, isMarketing } from '@/content/service-pages';
+import { legalServices } from '@/content/legal';
+import { categoryTitle, isMarketing, isLegal } from '@/content/service-pages';
 
 export function BusinessPage({ content: c, service: s }: { content: Content; service: BusinessService }) {
   const en = c.locale === 'en';
   const marketing = isMarketing(s);
   const category = categoryTitle(s,c.locale);
-  const siblings = marketing ? marketingServices : businessServices;
+  const siblings = isLegal(s) ? legalServices : marketing ? marketingServices : businessServices;
   return <><Header content={c} page="services" businessSlug={s.slug.sq} />
     <main id="main" tabIndex={-1}>
       <InnerHero content={c} title={s.title[c.locale]} eyebrow={category} />
@@ -21,9 +22,9 @@ export function BusinessPage({ content: c, service: s }: { content: Content; ser
         <article className="business-article" id="service-description" tabIndex={-1}>
           <p className="eyebrow line-before">{category}</p>
           <h2>{s.title[c.locale]}</h2>
-          {s.paragraphs[c.locale].length ? s.paragraphs[c.locale].map(p=><p key={p}>{p}</p>) : <p className="business-pending">{en ? 'Service description coming soon.' : 'Përshkrimi i shërbimit së shpejti.'}</p>}
+          {s.bullets ? <ul className="legal-service-list">{s.bullets[c.locale].map(item=><li key={item}>{item}</li>)}</ul> : s.paragraphs[c.locale].length ? s.paragraphs[c.locale].map(p=><p key={p}>{p}</p>) : <p className="business-pending">{en ? 'Service description coming soon.' : 'Përshkrimi i shërbimit së shpejti.'}</p>}
           <div className="business-contact"><h3>{en ? 'Let’s talk' : 'Le të bisedojmë'}</h3><a className="text-link" href="tel:+355672025509">+355 67 20 25509<Icon name="arrow" /></a><a className="text-link" href="mailto:info@rudispartners.al">info@rudispartners.al<Icon name="arrow" /></a></div>
-          <p>{about[c.locale].sectors}</p><a className="text-link" href={`${routes[c.locale].home}#sektoret`}>{c.nav.sectors}<Icon name="arrow" /></a>
+          <p>{about[c.locale].sectors}</p><a className="text-link" href={routes[c.locale].sectors}>{c.nav.sectors}<Icon name="arrow" /></a>
         </article>
         <aside className="business-sidebar" aria-label={category}><h2>{category}</h2><nav>{siblings.map(item=><a key={item.slug.sq} href={businessHref(item,c.locale)} aria-current={item.slug.sq===s.slug.sq ? 'page' : undefined}>{item.title[c.locale]}<Icon name="arrow" /></a>)}</nav><a className="business-back" href={routes[c.locale].services}>{en ? 'All services' : 'Të gjitha shërbimet'}</a></aside>
       </div>

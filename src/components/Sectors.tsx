@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import type { Content } from '@/content/types';
+import { sectorPages, sectorHref } from '@/content/sector-pages';
 import { Icon } from './Icon';
 
 export function Sectors({ content: c }: { content: Content }) {
@@ -45,7 +46,7 @@ export function Sectors({ content: c }: { content: Content }) {
       {c.sectors.items.map((s, i) => <article className="sector-card" id={`sector-${s.id}`} key={s.id} tabIndex={-1}>
         <img src={s.image} alt="" loading="lazy" width="550" height="550" />
         <span className="sector-number" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
-        <h3>{s.title}</h3>
+        <h3><a href={sectorHref(sectorPages.find(p=>p.id===s.id)!,c.locale)}>{s.title}</a></h3>
       </article>)}
     </div>
     <div className="sector-controls"><span className="sector-count"><b>{String(position.current).padStart(2, '0')}</b><span>/</span>{String(c.sectors.items.length).padStart(2, '0')}</span><div><button className="circle-button previous" aria-label={c.ui.previous} disabled={position.start} onClick={() => move(-1)}><Icon name="arrow" /></button><button className="circle-button" aria-label={c.ui.next} disabled={position.end} onClick={() => move(1)}><Icon name="arrow" /></button></div></div>
