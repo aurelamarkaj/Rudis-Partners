@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Rudis & Partners
 
 Website lokal dygjuhësh, ndërtuar me Next.js App Router, React, TypeScript dhe CSS. Dizajni ndjek `shembull 1.pdf`; përmbajtja e biznesit merret nga homepage e https://rudispartners.al/.
@@ -107,3 +108,6 @@ Lista Biznes & Financë tani ka shtatë lidhje, duke ndarë taksat nga audit/kon
 `/kontakt` / `/en/contact` show the official address, phone, email, Facebook and availability. No form submissions or backend are added. `/njohuri` / `/en/insights` show a bilingual coming-soon page. Both are linked from header/footer and retain the shared inner-page hero. Contact information was checked against `https://rudispartners.al/contact-us/` and its English version on 2026-09-18.
 
 Contact now includes the original four fields in both languages. The local form opens a prefilled email draft; direct server delivery is not configured.
+=======
+Rudi's Partners Project
+>>>>>>> b8ec9ab52ed7d820bb57d1e314d686222455a564
