@@ -97,12 +97,13 @@ Testimi u krye në shfletuesin e aplikacionit me përmasa të simuluara, jo në 
 - 320px detail viewport: no horizontal overflow or broken loaded images.
 - Turbopack development did not hydrate interactive controls in the local browser; refreshed cache did not solve it. Supported Webpack development mode restores the controls; npm dev now uses it.
 
-## Contact, insights and sector alignment — 2026-09-18
+## Contact and sector alignment — updated 2026-09-23
 
 - Sector cards stretch their heading areas within each grid row. At 1440px, the first three separators all measured y=1358.875px.
-- Added contact and coming-soon insights pages in SQ/EN, with same-page locale switching and header/footer links.
+- Contact remains available in SQ/EN with same-page locale switching. The temporary Insights/Njohuri page and its navigation links were removed.
 - Contact data taken from the official contact page; template filler and missing-form errors omitted. Phone/email links remain direct native links.
-- Inner-page hero contact buttons now lead to the contact page; on the contact page the button jumps to its contact details.
+- Hero eyebrow labels and contact buttons were removed from the homepage and all inner pages. Desktop and laptop hero height is 400px.
+- Contact now starts with the form, followed by “Le të bisedojmë”; the 24/24 section is omitted from both the page body and its footer.
 - English contact at 375px: correct document language and no horizontal overflow.
 
 ## Contact form — 2026-09-18
@@ -116,3 +117,12 @@ Replaced 485–550px square thumbnails with original source photos, 1024–2560p
 ## Search on sector pages — 2026-09-18
 
 Reproduced the OJF navigation flow. Search worked after development compilation/hydration, with no application console errors in the test tab. Switched the local preview at 127.0.0.1:3001 to the existing verified production build (`npm run start -- --port 3001`) to remove development compilation delays. Verified immediate search opening, accent-insensitive `turizem` matching, navigation OJF → Tourism, and a second search back to OJF. Future code edits require a new build and preview restart; use the dev command when actively editing.
+
+## Final responsive QA — 2026-09-23
+
+- Verified representative SQ/EN home, about, services, legal, marketing, sector overview/detail and contact pages at 320px, 375px and 768px.
+- No horizontal overflow or broken images were found. Long hero titles remain within the viewport.
+- Mobile menu, scrollable two-level services menu and search were exercised at 320px.
+- Increased header control heights to 44px and corrected the contact footer to one column below 650px.
+- Production build and TypeScript passed. All 92 public prerendered routes returned HTTP 200 from the production preview.
+- Browser console had no warnings or errors during the final 320px contact check.

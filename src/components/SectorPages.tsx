@@ -16,7 +16,7 @@ export function SectorOverview({ content:c }: { content:Content }) {
 
 export function SectorDetail({ content:c, sector:s }: {content:Content;sector:SectorPageContent}) {
  return <><Header content={c} page="sectors" sectorSlug={s.slug.sq} /><main id="main" tabIndex={-1}>
- <InnerHero content={c} title={s.title[c.locale]} eyebrow={c.nav.sectors} />
+ <InnerHero content={c} title={s.title[c.locale]} />
  <div className="business-layout"><article className="business-article"><img className="sector-detail-photo" src={s.image} alt="" width="550" height="550" /><p className="eyebrow line-before">{c.sectors.eyebrow}</p><h2>{s.title[c.locale]}</h2>{s.paragraphs[c.locale].map(p=><p key={p}>{p}</p>)}<a className="gold-button" href="#kontakt">{c.hero.cta}<Icon name="arrow" /></a></article>
  <aside className="business-sidebar"><h2>{c.nav.sectors}</h2><nav aria-label={c.nav.sectors}>{sectorPages.map(item=><a key={item.id} href={sectorHref(item,c.locale)} aria-current={item.id===s.id?'page':undefined}>{item.title[c.locale]}<Icon name="arrow" /></a>)}</nav><a className="business-back" href={routes[c.locale].sectors}>{c.locale==='sq'?'Të gjithë sektorët':'All sectors'}</a></aside></div>
  </main><Footer content={c} page="sectors" /></>;

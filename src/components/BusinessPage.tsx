@@ -17,7 +17,7 @@ export function BusinessPage({ content: c, service: s }: { content: Content; ser
   const siblings = isLegal(s) ? legalServices : marketing ? marketingServices : businessServices;
   return <><Header content={c} page="services" businessSlug={s.slug.sq} />
     <main id="main" tabIndex={-1}>
-      <InnerHero content={c} title={s.title[c.locale]} eyebrow={category} />
+      <InnerHero content={c} title={s.title[c.locale]} />
       <div className="business-layout">
         <article className="business-article" id="service-description" tabIndex={-1}>
           <p className="eyebrow line-before">{category}</p>

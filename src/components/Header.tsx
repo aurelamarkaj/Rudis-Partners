@@ -82,7 +82,6 @@ export function Header({ content: c, page = 'home', businessSlug, sectorSlug }: 
         <a href={aboutPath} aria-current={page === 'about' ? 'page' : undefined} onClick={() => setMenuOpen(false)}>{c.nav.about}</a>
         <ServicesMenu currentSlug={businessSlug} content={c} active={page === 'services'} onNavigate={() => setMenuOpen(false)} />
         <a href={routes[c.locale].sectors} aria-current={page === 'sectors' ? 'page' : undefined} onClick={() => setMenuOpen(false)}>{c.nav.sectors}</a>
-        <a href={routes[c.locale].insights} aria-current={page === 'insights' ? 'page' : undefined} onClick={() => setMenuOpen(false)}>{c.nav.insights}</a>
         <a href={routes[c.locale].contact} aria-current={page === 'contact' ? 'page' : undefined} onClick={() => setMenuOpen(false)}>{c.nav.contact}</a>
       </nav>
       <div className="header-actions">

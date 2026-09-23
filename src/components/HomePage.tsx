@@ -11,7 +11,7 @@ export function HomePage({ content: c }: { content: Content }) {
     <main id="main" tabIndex={-1}>
       <section id="home" className="hero" aria-labelledby="hero-title" tabIndex={-1}>
         <img className="hero-image" src="/images/hero.webp" alt="" fetchPriority="high" width="2000" height="2000" />
-        <div className="hero-inner"><span className="hero-eyebrow">Rudis & Partners</span><h1 id="hero-title">{c.hero.first}<br /><span>{c.hero.second}</span></h1><p className="hero-description">{c.hero.description}</p><a className="gold-button" href="#kontakt">{c.hero.cta}<Icon name="arrow" /></a></div>
+        <div className="hero-inner"><h1 id="hero-title">{c.hero.first}<br /><span>{c.hero.second}</span></h1><p className="hero-description">{c.hero.description}</p></div>
       </section>
       <section className="process-section" aria-labelledby="process-title">
         <div className="process-grid">
